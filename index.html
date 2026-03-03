@@ -32,11 +32,40 @@
     <div class="controls">
       <label for="count">게임 수:</label>
       <input type="number" id="count" value="1" min="1" max="10" />
+      <button class="options-btn" onclick="openOptionsModal()">⚙️ 옵션</button>
     </div>
 
     <button id="generateBtn" onclick="generateLotto()">🎲 번호 추첨!</button>
 
+    <div id="requiredInfo" class="required-info"></div>
+    <div id="excludeInfo" class="exclude-info"></div>
+
     <div id="results"></div>
+  </div>
+
+  <!-- Options Modal -->
+  <div id="optionsModal" class="modal-overlay" onclick="closeModalOutside(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-tabs">
+          <button class="tab-btn active" onclick="switchTab('required')">필수 번호</button>
+          <button class="tab-btn" onclick="switchTab('exclude')">제외 번호</button>
+        </div>
+        <button class="modal-close" onclick="closeOptionsModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="tab-required" class="tab-content active">
+          <p class="tab-desc">추첨 결과에 반드시 포함될 번호를 선택하세요.</p>
+          <div class="ball-grid" id="requiredBallGrid"></div>
+          <button class="apply-btn" onclick="applyRequired()">필수 번호 적용</button>
+        </div>
+        <div id="tab-exclude" class="tab-content">
+          <p class="tab-desc">추첨에서 제외할 번호를 선택하세요.</p>
+          <div class="ball-grid" id="excludeBallGrid"></div>
+          <button class="apply-btn" onclick="applyExclude()">제외 번호 적용</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <script defer type="text/javascript" src="/main.js"></script>
