@@ -159,5 +159,16 @@ function applyExclude() {
   closeOptionsModal();
 }
 
+function resetAll() {
+  // Deselect all balls in both grids
+  document.querySelectorAll('.modal-ball.selected').forEach(b => b.classList.remove('selected'));
+
+  // Clear applied state and info text
+  requiredNumbers = [];
+  excludedNumbers = [];
+  document.getElementById('requiredInfo').textContent = '';
+  document.getElementById('excludeInfo').textContent = '';
+}
+
 // ─── Init ─────────────────────────────────────────────────
 initBallGrids();
