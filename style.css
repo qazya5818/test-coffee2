@@ -269,6 +269,8 @@ button:disabled {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 390px; /* 5 games × 70px + 4 gaps × 10px */
+  overflow: hidden;
 }
 
 .game {
