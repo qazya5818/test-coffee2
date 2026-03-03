@@ -1,1 +1,357 @@
-/* Add styles here */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+  background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Background floating orbs */
+.bg-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  animation: floatOrb 10s ease-in-out infinite;
+}
+
+.orb1 {
+  width: 380px;
+  height: 380px;
+  background: rgba(79, 110, 247, 0.22);
+  top: -120px;
+  left: -120px;
+  animation-delay: 0s;
+}
+
+.orb2 {
+  width: 480px;
+  height: 480px;
+  background: rgba(180, 80, 220, 0.14);
+  bottom: -160px;
+  right: -160px;
+  animation-delay: -5s;
+}
+
+.orb3 {
+  width: 220px;
+  height: 220px;
+  background: rgba(0, 200, 200, 0.1);
+  top: 40%;
+  right: 8%;
+  animation-delay: -3s;
+  animation-duration: 7s;
+}
+
+@keyframes floatOrb {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(20px, 30px) scale(1.06); }
+  66%       { transform: translate(-15px, 15px) scale(0.95); }
+}
+
+/* Container */
+.container {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  padding: 44px 40px;
+  width: 100%;
+  max-width: 540px;
+  box-shadow: 0 8px 48px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+h1 {
+  font-size: 1.95rem;
+  margin-bottom: 8px;
+  color: #fff;
+  text-shadow: 0 0 32px rgba(160, 140, 255, 0.55);
+  letter-spacing: -0.5px;
+}
+
+.subtitle {
+  color: rgba(255, 255, 255, 0.45);
+  font-size: 0.88rem;
+  margin-bottom: 32px;
+}
+
+/* Lottery Machine */
+.machine {
+  margin-bottom: 28px;
+}
+
+.drum {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 35% 30%,
+    rgba(130, 110, 255, 0.9) 0%,
+    rgba(45, 35, 130, 0.95) 55%,
+    rgba(10, 5, 60, 1) 100%
+  );
+  border: 2px solid rgba(160, 140, 255, 0.4);
+  box-shadow:
+    0 0 40px rgba(110, 90, 255, 0.4),
+    0 0 90px rgba(110, 90, 255, 0.15),
+    inset 0 0 40px rgba(0, 0, 90, 0.5);
+  position: relative;
+  overflow: hidden;
+  margin: 0 auto 12px;
+  transition: box-shadow 0.3s;
+}
+
+.drum.spinning {
+  box-shadow:
+    0 0 60px rgba(110, 90, 255, 0.75),
+    0 0 130px rgba(110, 90, 255, 0.3),
+    inset 0 0 40px rgba(0, 0, 90, 0.5);
+}
+
+/* Shine highlight on drum */
+.drum-shine {
+  position: absolute;
+  top: 10%;
+  left: 14%;
+  width: 38%;
+  height: 24%;
+  background: radial-gradient(ellipse, rgba(255, 255, 255, 0.32), transparent);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* Mini balls orbiting inside drum */
+.drum-balls {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  animation: rotateDrum 3s linear infinite;
+}
+
+.drum.spinning .drum-balls {
+  animation-duration: 0.45s;
+}
+
+@keyframes rotateDrum {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.mini-ball {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  box-shadow: inset -2px -2px 4px rgba(0, 0, 0, 0.4), inset 1px 1px 3px rgba(255, 255, 255, 0.5);
+}
+
+.b1 { background: #f5a623; top: 12px;  left: 50%;  transform: translateX(-50%); }
+.b2 { background: #4a90d9; top: 38px;  right: 14px; }
+.b3 { background: #e04040; bottom: 12px; left: 50%; transform: translateX(-50%); }
+.b4 { background: #aaa;    top: 38px;  left: 14px; }
+.b5 { background: #4caf50; top: 50%;   left: 50%;  transform: translate(-50%, -50%); }
+
+.drum-status {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.65);
+  min-height: 28px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.drum-status.drawing {
+  animation: statusPulse 0.7s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.35; }
+}
+
+/* Controls */
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 18px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.controls input {
+  width: 66px;
+  padding: 7px 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  font-size: 1rem;
+  text-align: center;
+  outline: none;
+  color: white;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.controls input:focus {
+  border-color: rgba(160, 140, 255, 0.65);
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.controls input[type="number"]::-webkit-inner-spin-button,
+.controls input[type="number"]::-webkit-outer-spin-button {
+  opacity: 0.3;
+}
+
+/* Button */
+button {
+  background: linear-gradient(135deg, #7c5cff, #4f6ef7);
+  color: white;
+  border: none;
+  padding: 14px 48px;
+  font-size: 1.1rem;
+  border-radius: 50px;
+  cursor: pointer;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  box-shadow: 0 4px 24px rgba(108, 71, 255, 0.45);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.15s, box-shadow 0.2s, opacity 0.2s;
+}
+
+/* Shimmer sweep */
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.18), transparent);
+  transition: left 0.45s;
+}
+
+button:hover::before {
+  left: 100%;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(108, 71, 255, 0.65);
+}
+
+button:active {
+  transform: translateY(0) scale(0.97);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: 0 4px 24px rgba(108, 71, 255, 0.25);
+}
+
+/* Results */
+#results {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.game {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  padding: 12px 16px;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: slideIn 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.game-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.38);
+  min-width: 44px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.balls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* 3D glossy balls */
+.ball {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: white;
+  position: relative;
+  flex-shrink: 0;
+  opacity: 0;
+  transform: scale(0) rotate(-180deg);
+  box-shadow: inset -4px -4px 8px rgba(0, 0, 0, 0.35), 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+/* Gloss highlight dot */
+.ball::after {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 9px;
+  width: 11px;
+  height: 7px;
+  background: rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  transform: rotate(-30deg);
+  pointer-events: none;
+}
+
+.ball.reveal {
+  animation: ballPop 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes ballPop {
+  0%   { opacity: 0; transform: scale(0)    rotate(-180deg); }
+  60%  { opacity: 1; transform: scale(1.18) rotate(12deg); }
+  80%  {             transform: scale(0.93) rotate(-5deg); }
+  100% { opacity: 1; transform: scale(1)    rotate(0deg); }
+}
+
+/* Ball color gradients */
+.ball.yellow { background: radial-gradient(ellipse at 35% 30%, #ffd166, #f5a623 60%, #c07a10); }
+.ball.blue   { background: radial-gradient(ellipse at 35% 30%, #74b9ff, #4a90d9 60%, #2563ae); }
+.ball.red    { background: radial-gradient(ellipse at 35% 30%, #ff7a7a, #e04040 60%, #b02020); }
+.ball.gray   { background: radial-gradient(ellipse at 35% 30%, #ddd,    #999    60%, #666); }
+.ball.green  { background: radial-gradient(ellipse at 35% 30%, #78e08f, #4caf50 60%, #2e7d32); }
